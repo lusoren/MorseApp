@@ -4,8 +4,9 @@
 	
 	<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
 	<link rel="stylesheet" href="style.css">
-	<script type="text/javascript" src="js/paper.js"></script>
-	<script type="text/javascript" src="js/soundsScript.js"></script>
+
+	<script type="text/javascript" src="js/decoder.js"></script>
+	<script type="text/javascript" src="js/visuals.js"></script>
 	
 	<meta name = "viewport" content = "user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width"/>
 	<meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -14,14 +15,16 @@
 </head>
 
 <body>
-	<div class="textDump">LPASDF_ASDSF_SAF</div>
+	
+	<div class="textDump" id="wordOutput"></div>
+	<div class="textDump" id="dotOutput"></div>
 
 	<div class="centralWrapper">
 		<div class="dotDash">
-			<h1></h1>
+			<div class="dot" id="dot"></div>
 		</div>
 		<div class="bigLetter">
-			<h1>H</h1>
+			<h1 id="bigLetter">H</h1>
 		</div>
 		
 		<div class="dotCell"></div>

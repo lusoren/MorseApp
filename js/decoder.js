@@ -12,8 +12,11 @@ $(document).ready(function(){
     var morse= [".-","-...","-.-.","-..",".","..-.","--.","....","..","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."];
     var alpha= ["a","b","c","d","e","f","g","h","i","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
     
-    //$("body").css("background-color","white");
-    //on space key down
+    var dotTime = 50;
+    var dashTime = 150;
+    var spaceTime = 300;
+
+    //on touch
     $(window).bind("touchstart",function() {
    
         pressed=true;
@@ -23,10 +26,9 @@ $(document).ready(function(){
         
         clearTimeout(timeoutSilence);
         count();
-    
     });
     
-    //on space key up
+    //on release
     $(window).bind( "touchend",function() {
         pressed=false;
         
@@ -37,43 +39,57 @@ $(document).ready(function(){
         countSilence();
     });
     
+    //count how long held
     function count() {
-        $("#counter").html(noiseCounter);
         noiseCounter++;
         timeoutNoise=setTimeout(function(){count()}, 1);
     }
     
+    //count time between tones
     function countSilence() {
-        $("#silenceCounter").html(silenceCounter);
         silenceCounter++;
-        if (silenceCounter>330) {
+        
+        //if dash duration has passed, generate letter
+        if (silenceCounter> dashTime) {
             generateLetter(curLetter);
+            curLetter="";
+        }
+        
+        //if space duration has passed, add space
+        if (silenceCounter>spaceTime) {
+                
+            $("#textDump").append("/");
             $("#textDump2").append("_");
             
             curLetter="";
             clearTimeout(timeoutSilence);
             return;
         }
+        
+        //loop
         timeoutSilence=setTimeout(function(){countSilence()}, 1);
     }
     
+    //add mark depending on noiseCounter
     function addMark(count) {
-        if (count<50) {
-            $("#textDump").append(".");
+
+        if (count<dotTime) {
+            $("#dotOutput").append(".");
             curLetter+= ".";
         } else {
-            $("#textDump").append("-");
+            $("#dotOutput").append("-");
             curLetter+= "-";
         }
     }
     
     function addSpace(count) {
-        if (count<60) {
+        if (count<dotTime) {
             $("#textDump").append("");
             
-        } else if(count<330) {
+        } else if(count<spaceTime) {
             generateLetter(curLetter);
-            $("#textDump").html("");
+            $("#dotOutput").append("/");
+            $("#wordOutput").append(" ");
             curLetter="";
             
         } else {
@@ -81,17 +97,14 @@ $(document).ready(function(){
         }
     }
     
+    //generate letter from dots and dashes
     function generateLetter(input) {
         var a = morse.indexOf(input);
-        console.log(a);
-        
         if (a<0) {
-            $("#textDump2").append("");
-            $("#textDump").html("");
+
         } else {
-            $("#textDump2").append(alpha[a]);
-            $("#bigLetter").html(alpha[a]);
-            $("#textDump").html("");
+            $("#wordOutput").append(alpha[a]);
+
         }
     }
 });
