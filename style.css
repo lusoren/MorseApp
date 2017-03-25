@@ -164,7 +164,7 @@ h2 {
     transform: translate(0%,-50%); 
 }
 
-.processBar1 {
+.progressBar1 {
     height: 8vh;
     width:100%;
     box-sizing: border-box;
@@ -176,7 +176,7 @@ h2 {
     bottom: 16vh;   
 }
 
-.processBar2 {
+.progressBar2 {
     height: 8vh;
     width:100%;
     box-sizing: border-box;
@@ -186,4 +186,16 @@ h2 {
     
     position: absolute;
     bottom:0;     
+}
+
+#wordProgress {
+    height: 100%;
+    background-color: black;
+    width: 0px;
+}
+
+#letterProgress {
+    height: 100%;
+    background-color: black;
+    width: 0px;
 }

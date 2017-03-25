@@ -7,16 +7,12 @@ $(document).ready(function(){
     var growCounter=0;
     
     var myVar;
-    
-    var firstIncrement = 20;
-    var secondIncrement = 30;
-    var thirdIncrement = 0;
+
 
     //on touch
     $(window).bind("touchstart",function() {
         $("#dot").css("display","inherit");
-
-        myVar = setInterval(growIt, 10);
+        myVar = setInterval(growIt, 1);
     });
     
     var curWidth  = 20;
@@ -28,14 +24,13 @@ $(document).ready(function(){
         clearInterval(myVar);
         $("#dot").css("display","none");
         
-        
         curWidth  = 20;
         curHeight = 20
         bordRadius= 30;
         
         $("#dot").css("width",  curWidth);
         $("#dot").css("height", curHeight);
-        $("#dot").css("bordRadius",  bordRadius);
+        $("#dot").css("border-radius",  bordRadius);
 
         growCounter=0;
     });
@@ -51,13 +46,52 @@ $(document).ready(function(){
             $("#dot").css("width",  curWidth);
             $("#dot").css("height", curHeight);
             
-        } else if (growCounter>dotTime + 20 && growCounter<dashTime) {
+        } else if (growCounter> dotTime + 50 && growCounter<dashTime) {
            
-            curWidth+=.5;
-            bordRadius-= .5;
+            curWidth+=.9;
+            bordRadius-= .6;
             $("#dot").css("width",  curWidth);
             $("#dot").css("border-radius",  bordRadius);
             
         } 
+    }
+    
+    
+    var timeoutNoise;
+    var docWidth= $(document).width();
+    
+    
+    
+    var increment= docWidth/150;
+    console.log(increment);
+    var increment2= docWidth/200;
+    var iterations=0;
+    
+    $(window).bind("touchend",function() {
+        moveBar();
+    });
+    
+    $(window).bind( "touchstart",function() {
+        iterations=0;
+        $("#wordProgress").width(0);
+        $("#letterProgress").width(0);
+        
+        clearTimeout(timeoutNoise);
+    });
+    
+   
+    function moveBar() {
+        iterations++;
+        
+        var curWidth=$("#letterProgress").width();
+        var curWidth2=$("#wordProgress").width();
+        
+        if (iterations<=150) {
+            $("#letterProgress").width(iterations * increment);
+        } else if(iterations<=350) {
+            $("#wordProgress").width(curWidth2 + increment2);
+        }
+        
+        timeoutNoise=setTimeout(function(){moveBar()}, 1);
     }
 });

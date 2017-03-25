@@ -58,8 +58,8 @@ $(document).ready(function(){
         //if space duration has passed, add space
         if (silenceCounter>spaceTime) {
                 
-            $("#textDump").append("/");
-            $("#textDump2").append("_");
+            $("#dotOutput").append("/");
+            $("#wordOutput").append("_");
             
             curLetter="";
             clearTimeout(timeoutSilence);
@@ -73,7 +73,7 @@ $(document).ready(function(){
     //add mark depending on noiseCounter
     function addMark(count) {
 
-        if (count<dotTime) {
+        if (count<dashTime) {
             $("#dotOutput").append(".");
             curLetter+= ".";
         } else {
@@ -84,12 +84,9 @@ $(document).ready(function(){
     
     function addSpace(count) {
         if (count<dotTime) {
-            $("#textDump").append("");
             
         } else if(count<spaceTime) {
             generateLetter(curLetter);
-            $("#dotOutput").append("/");
-            $("#wordOutput").append(" ");
             curLetter="";
             
         } else {
@@ -104,6 +101,7 @@ $(document).ready(function(){
 
         } else {
             $("#wordOutput").append(alpha[a]);
+            $("#bigLetter").html(alpha[a]);
 
         }
     }
