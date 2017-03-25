@@ -4,10 +4,8 @@ $(document).ready(function(){
     var dashTime = 150;
     var spaceTime = 300;
     
-    var growCounter=0;
-    
+    var growCounter=0;  
     var myVar;
-
 
     //on touch
     $(window).bind("touchstart",function() {
@@ -60,12 +58,11 @@ $(document).ready(function(){
     var timeoutNoise;
     var docWidth= $(document).width();
     
+    var increment= docWidth/dashTime;
+    var increment2= docWidth/(spaceTime-dashTime);
     
-    
-    var increment= docWidth/150;
-    console.log(increment);
-    var increment2= docWidth/200;
     var iterations=0;
+    
     
     $(window).bind("touchend",function() {
         moveBar();
@@ -86,10 +83,10 @@ $(document).ready(function(){
         var curWidth=$("#letterProgress").width();
         var curWidth2=$("#wordProgress").width();
         
-        if (iterations<=150) {
+        if (iterations<=dashTime) {
             $("#letterProgress").width(iterations * increment);
-        } else if(iterations<=350) {
-            $("#wordProgress").width(curWidth2 + increment2);
+        } else if(iterations<=spaceTime) {
+            $("#wordProgress").width((iterations-dashTime) * increment2);
         }
         
         timeoutNoise=setTimeout(function(){moveBar()}, 1);

@@ -18,7 +18,6 @@ $(document).ready(function(){
 
     //on touch
     $(window).bind("touchstart",function() {
-   
         pressed=true;
         
         addSpace(silenceCounter);
@@ -52,6 +51,8 @@ $(document).ready(function(){
         //NEW LETTER
         //if dash duration has passed, generate letter
         if (silenceCounter> dashTime) {
+            $("#dotOutput").append(" ");
+            
             generateLetter(curLetter);
             clearBoxes();
             curLetter="";
@@ -88,7 +89,7 @@ $(document).ready(function(){
     }
     
     function addSpace(count) {
-        if (count<dotTime) {
+        if (count<dashTime) {
             
         } else if(count<spaceTime) {
             generateLetter(curLetter);
