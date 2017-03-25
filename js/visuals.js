@@ -2,7 +2,7 @@ $(document).ready(function(){
     
     var dotTime = 50;
     var dashTime = 150;
-    var spaceTime = 300;
+    var spaceTime = 350;
     
     var growCounter=0;  
     var myVar;
@@ -89,6 +89,6 @@ $(document).ready(function(){
             $("#wordProgress").width((iterations-dashTime) * increment2);
         }
         
-        timeoutNoise=setTimeout(function(){moveBar()}, 1);
+        timeoutNoise=setTimeout(function(){moveBar()}, 10);
     }
 });

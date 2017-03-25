@@ -14,7 +14,7 @@ $(document).ready(function(){
     
     var dotTime = 50;
     var dashTime = 150;
-    var spaceTime = 300;
+    var spaceTime = 350;
 
     //on touch
     $(window).bind("touchstart",function() {
