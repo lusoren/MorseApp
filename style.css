@@ -4,6 +4,9 @@ body {
     position: relative;
     height: 100vh;
     
+    width: 101vw;
+    overflow: visible;
+    
     max-width: 400px;
     user-select: none;
         -moz-user-select: none;
@@ -55,7 +58,7 @@ div {
     
 }
 
-.dot {
+.bigDot {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -103,6 +106,7 @@ div {
 
 .dotCell {
     border: solid;
+    position: relative;
     
     box-sizing: border-box;
     width: 25%;
@@ -190,12 +194,37 @@ h2 {
 
 #wordProgress {
     height: 100%;
-    background-color: black;
+    background-color: #cfcfcf;
     width: 0px;
 }
 
 #letterProgress {
     height: 100%;
-    background-color: black;
+    background-color: #cfcfcf;
     width: 0px;
+}
+
+.dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    
+    background-color: black;
+}
+
+.dash {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    
+    width: 40px;
+    height: 20px;
+    
+    background-color: black;
 }

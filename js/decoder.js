@@ -49,12 +49,15 @@ $(document).ready(function(){
     function countSilence() {
         silenceCounter++;
         
+        //NEW LETTER
         //if dash duration has passed, generate letter
         if (silenceCounter> dashTime) {
             generateLetter(curLetter);
+            clearBoxes();
             curLetter="";
         }
         
+        //NEW WORD
         //if space duration has passed, add space
         if (silenceCounter>spaceTime) {
                 
@@ -75,9 +78,11 @@ $(document).ready(function(){
 
         if (count<dashTime) {
             $("#dotOutput").append(".");
+            updateBoxes(true);
             curLetter+= ".";
         } else {
             $("#dotOutput").append("-");
+            updateBoxes(false);
             curLetter+= "-";
         }
     }
@@ -102,7 +107,25 @@ $(document).ready(function(){
         } else {
             $("#wordOutput").append(alpha[a]);
             $("#bigLetter").html(alpha[a]);
-
         }
+    }
+    
+    var cellCounter = 1;
+    function updateBoxes(isDot) {
+        if (isDot) {
+            $("#cell" + cellCounter).html($('<div>', {class: 'dot'}));
+        } else {
+            $("#cell" + cellCounter).html($('<div>', {class: 'dash'}));
+        }
+        
+        cellCounter++;
+    }
+    
+    function clearBoxes() {
+        cellCounter =1;
+        for(var i=1; i < 5;++i){
+            $("#cell" + i).html("");
+        }
+        
     }
 });
