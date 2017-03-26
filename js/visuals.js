@@ -1,6 +1,6 @@
-var dotTime =   5;
-var dashTime =  15;
-var spaceTime = 35;
+var dotTime =   20;
+var dashTime =  60;
+var spaceTime = 140;
 
 var growCounter=0;  
 var myVar;

@@ -12,12 +12,12 @@ $(document).ready(function(){
     var morse= [".-","-...","-.-.","-..",".","..-.","--.","....","..","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."];
     var alpha= ["a","b","c","d","e","f","g","h","i","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 
-    
     var touchTimeout;
     var releaseTimeout;
 
     //on touch
     $(window).bind("touchstart",function() {
+        console.log("DOWN");
         //clear timout
         clearTimeout(releaseTimeout);
         
@@ -38,12 +38,14 @@ $(document).ready(function(){
     
     //looping function while touched
     function touchDown() {
+        console.log("ITER");
         growIt();
         noiseCounter++;
     }
     
     //on release
     $(window).bind( "touchend",function() {
+        console.log("UP");
         releaseTimeout = setInterval(touchUp, 10);
         pressed=false;
         
@@ -74,7 +76,7 @@ $(document).ready(function(){
         if (silenceCounter == spaceTime) {
                 
             $("#dotOutput").append("/");
-            $("#wordOutput").append("_");
+            $("#wordOutput").append(" ");
             
             curLetter="";
             clearTimeout(timeoutSilence);
