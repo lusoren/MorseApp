@@ -22,7 +22,7 @@ $(document).ready(function(){
         clearTimeout(releaseTimeout);
         
         //start touch timeout
-        touchTimeout = setInterval(touchDown, 1);
+        touchTimeout = setInterval(touchDown, 10);
         
         //change dot display
         $("#dot").css("display","inherit");
@@ -44,7 +44,7 @@ $(document).ready(function(){
     
     //on release
     $(window).bind( "touchend",function() {
-        releaseTimeout = setInterval(touchUp, 1);
+        releaseTimeout = setInterval(touchUp, 10);
         pressed=false;
         
         addMark(noiseCounter);
@@ -101,7 +101,6 @@ $(document).ready(function(){
         if (count<dashTime) {
             
         } else if(count<spaceTime) {
-
             curLetter="";
             
         } else {
@@ -136,6 +135,5 @@ $(document).ready(function(){
         for(var i=1; i < 5;++i){
             $("#cell" + i).html("");
         }
-        
     }
 });

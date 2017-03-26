@@ -1,6 +1,6 @@
-var dotTime = 50;
-var dashTime = 150;
-var spaceTime = 350;
+var dotTime =   5;
+var dashTime =  15;
+var spaceTime = 35;
 
 var growCounter=0;  
 var myVar;
@@ -25,7 +25,7 @@ function resetDot() {
 }
 
 function growIt() {
-    growCounter++;
+    growCounter+=1;
    
     if (growCounter<dotTime) {
         
@@ -35,10 +35,10 @@ function growIt() {
         $("#dot").css("width",  curWidth);
         $("#dot").css("height", curHeight);
         
-    } else if (growCounter> dotTime + 50 && growCounter<dashTime) {
+    } else if (growCounter> dotTime + 5 && growCounter<=dashTime) {
        
-        curWidth+=1;
-        bordRadius-= .6;
+        curWidth+= 30/(dashTime-dotTime-5);
+        bordRadius-= 30/(dashTime-dotTime-5);
         $("#dot").css("width",  curWidth);
         $("#dot").css("border-radius",  bordRadius);
         
@@ -46,14 +46,12 @@ function growIt() {
 }
 
 
-var timeoutNoise;
 var docWidth= $(document).width();
 
 var increment= docWidth/dashTime;
 var increment2= docWidth/(spaceTime-dashTime);
 
 var iterations=0;
-
 
 $(window).bind("touchend",function() {
     moveBar();
@@ -63,8 +61,6 @@ $(window).bind( "touchstart",function() {
     iterations=0;
     $("#wordProgress").width(0);
     $("#letterProgress").width(0);
-    
-    clearTimeout(timeoutNoise);
 });
 
 
