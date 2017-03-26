@@ -11,46 +11,57 @@ $(document).ready(function(){
     
     var morse= [".-","-...","-.-.","-..",".","..-.","--.","....","..","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."];
     var alpha= ["a","b","c","d","e","f","g","h","i","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+
     
-    var dotTime = 50;
-    var dashTime = 150;
-    var spaceTime = 350;
+    var touchTimeout;
+    var releaseTimeout;
 
     //on touch
     $(window).bind("touchstart",function() {
+        //clear timout
+        clearTimeout(releaseTimeout);
+        
+        //start touch timeout
+        touchTimeout = setInterval(touchDown, 1);
+        
+        //change dot display
+        $("#dot").css("display","inherit");
         pressed=true;
         
+        //add space
         addSpace(silenceCounter);
+        
+        //reset silence counter
         silenceCounter=0;
         
-        clearTimeout(timeoutSilence);
-        count();
     });
+    
+    //looping function while touched
+    function touchDown() {
+        growIt();
+        noiseCounter++;
+    }
     
     //on release
     $(window).bind( "touchend",function() {
+        releaseTimeout = setInterval(touchUp, 1);
         pressed=false;
         
         addMark(noiseCounter);
+        resetDot();
         noiseCounter=0;
         
-        clearTimeout(timeoutNoise);
-        countSilence();
+        clearTimeout(touchTimeout);
     });
     
-    //count how long held
-    function count() {
-        noiseCounter++;
-        timeoutNoise=setTimeout(function(){count()}, 1);
-    }
-    
-    //count time between tones
-    function countSilence() {
+    //looping function while released
+    function touchUp() {
         silenceCounter++;
+        moveBar();
         
         //NEW LETTER
         //if dash duration has passed, generate letter
-        if (silenceCounter> dashTime) {
+        if (silenceCounter == dashTime) {
             $("#dotOutput").append(" ");
             
             generateLetter(curLetter);
@@ -60,7 +71,7 @@ $(document).ready(function(){
         
         //NEW WORD
         //if space duration has passed, add space
-        if (silenceCounter>spaceTime) {
+        if (silenceCounter == spaceTime) {
                 
             $("#dotOutput").append("/");
             $("#wordOutput").append("_");
@@ -68,11 +79,9 @@ $(document).ready(function(){
             curLetter="";
             clearTimeout(timeoutSilence);
             return;
-        }
-        
-        //loop
-        timeoutSilence=setTimeout(function(){countSilence()}, 1);
+        }        
     }
+    
     
     //add mark depending on noiseCounter
     function addMark(count) {
@@ -92,7 +101,7 @@ $(document).ready(function(){
         if (count<dashTime) {
             
         } else if(count<spaceTime) {
-            generateLetter(curLetter);
+
             curLetter="";
             
         } else {
@@ -104,7 +113,7 @@ $(document).ready(function(){
     function generateLetter(input) {
         var a = morse.indexOf(input);
         if (a<0) {
-
+            $("#bigLetter").html("?");
         } else {
             $("#wordOutput").append(alpha[a]);
             $("#bigLetter").html(alpha[a]);
