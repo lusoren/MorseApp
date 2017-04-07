@@ -49,7 +49,7 @@ function growIt() {
 var docWidth= $(document).width();
 
 var increment= docWidth/dashTime;
-var increment2= docWidth/(spaceTime-dashTime);
+var increment2= docWidth/spaceTime;
 
 var iterations=0;
 
@@ -67,12 +67,14 @@ $(window).bind( "touchstart",function() {
 function moveBar() {
     iterations++;
     
-    var curWidth=$("#letterProgress").width();
-    var curWidth2=$("#wordProgress").width();
+    //var curWidth=$("#letterProgress").width();
+    //var curWidth2=$("#wordProgress").width();
     
-    if (iterations<=dashTime) {
-        $("#letterProgress").width(iterations * increment);
-    } else if(iterations<=spaceTime) {
-        $("#wordProgress").width((iterations-dashTime) * increment2);
-    }
+    //if (iterations<=dashTime) {
+    //    $("#letterProgress").width(iterations * increment);
+    //} else if(iterations<=spaceTime) {
+    //    $("#wordProgress").width((iterations-dashTime) * increment2);
+    //}
+    
+    $("#wordProgress").width(iterations * increment2);
 }

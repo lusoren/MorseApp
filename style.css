@@ -24,7 +24,7 @@ body {
 }
 
 .textDump {
-    padding-top: 60px;
+    padding-top: 120px;
     padding: 20px;
     font-size: 20px;
     text-transform: uppercase;
@@ -38,7 +38,7 @@ div {
 .centralWrapper {
     width: 100%;
     position: absolute;
-    bottom: 32vh;
+    bottom: 16vh;
 }
 
 .dotDash {
