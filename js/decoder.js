@@ -1,8 +1,5 @@
 $(document).ready(function(){
     
-    var timeoutNoise;
-    var timeoutSilence;
-    
     var noiseCounter=0;
     var silenceCounter=0;
     
